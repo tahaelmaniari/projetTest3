@@ -1,0 +1,112 @@
+
+<div class="row mt-4 col-lg-12">
+
+
+  <div class="col-lg-4">
+    <table class="table table-bordered"  [hidden]="showFieldTable">
+      <thead>
+      <tr>
+        <th scope="col">Select</th>
+        <th scope="col">Champs</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let avf of avFields ">
+        <th scope="row" >
+          <nb-radio value="true" [checked]="isAvfSelected === true" (click)="handelSetFormControleName(avf.field, avf.label)"   (click)="setInputTypePlaceHolder(avf.type)"  >  </nb-radio>
+        </th>
+        <td>{{avf.field}}</td>
+
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-8">
+    <form [formGroup]="addFieldFormGroup"  (ngSubmit)="handelAddField()" class="col-lg-12" >
+      <div class="row mb-4 align-items-end" >
+
+        <div class="col-lg-6"  [hidden]="requiredToggle">
+          <h5 class="mb-4 fs-6">Champ Obligatoire</h5>
+          <nb-radio-group class="d-flex" formControlName="requiredFieled">
+            <nb-radio value="required" [checked]="isSelected === true"> True </nb-radio>
+            <nb-radio value="notRequired" [checked]="isSelected === false"> False </nb-radio>
+          </nb-radio-group>
+        </div>
+
+      </div>
+
+      <div class="row mb-4 align-items-end">
+
+
+        <div class="col-lg-6" [hidden]="limitCharToggle">
+          <h5 class="mb-4 fs-6">Nombre de characters MIN</h5>
+          <input nbInput type="text"  placeholder="character limit"  formControlName="filedCharLimit">
+        </div>
+
+        <div class="col-lg-6"  [hidden]="true">
+          <h5 class="mb-4 fs-6">Type de characters permis</h5>
+          <nb-select  placeholder="Choisissez un Type de Character "    formControlName="filedCharTypeAllowed">
+            <nb-option *ngFor="let charType of characterTypes" value="{{charType}}" >{{charType}} </nb-option>
+          </nb-select>
+        </div>
+
+
+      </div>
+
+
+      <div class="row mb-4 align-items-end ">
+
+
+        <div class="col-lg-6 " >
+          <h5 class="mb-4 fs-6">Label</h5>
+          <input nbInput type="text"  required placeholder="Label" formControlName="filedLabel" >
+    <!--      <div class="text-danger">
+            <div *ngIf="addFieldFormGroup.controls['filedLabel'].errors?.['required'] ">
+              <span class="ms-2 mt-0">  Champ Obligatoir </span>
+            </div>
+          </div>-->
+        </div>
+
+        <div class="col-lg-6" [hidden]="placeHolderToggle" >
+          <h5 class="mb-4 fs-6">Place holder</h5>
+          <input nbInput type="text"  placeholder="place holder" formControlName="filedPlaceHolder">
+        </div>
+
+
+      </div>
+
+
+      <div class="row mb-4 align-items-end ">
+
+        <div class="col-lg-6" [hidden]="valMinMaxToggle" >
+          <h5 class="mb-4 fs-6">valeur  numerique min-max</h5>
+          <div>
+            <input class="mb-2" nbInput type="text"  placeholder="min"   formControlName="filedValueMin">
+            <input nbInput type="text"  placeholder="max"   formControlName="filedValueMax">
+          </div>
+        </div>
+
+        <div class="col-lg-6 align-items-end  " >
+          <h5 class="mb-4 fs-6">Ajouter un champ</h5>
+          <div class="d-flex " >
+            <button *ngIf="creationMode" nbButton type="submit" hero status="warning" class="m-0" >Ajouter</button>
+            <button *ngIf="editeModeInChild && !creationMode" nbButton type="submit" hero status="warning" class="m-0" >Mettre à jour</button>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+</div>
+
+
+

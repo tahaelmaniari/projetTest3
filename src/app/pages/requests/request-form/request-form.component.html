@@ -1,0 +1,265 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-header *ngIf="request?.status==='A completer'">
+      <div class="row justify-content-between">
+        <h5 class="col">Demande à completer</h5>
+        <button  class="col-2 av-action w-auto text-bg-dark" (click)="retirer()" ><nb-icon class="me-2" icon="delete-left"></nb-icon>Retirer</button>
+      </div>
+
+    </nb-card-header>
+    <nb-card-body>
+
+      <ng-container *ngIf="state == State.LOADING">
+        <rpa-portal-loading></rpa-portal-loading>
+      </ng-container>
+      <nb-stepper #stepper>
+        <nb-step [stepControl]="firstForm" label="Infos préalables">
+          <form [formGroup]="firstForm" class="step-container">
+            <div class="row mt-5">
+              <div class="col-lg-12" >
+                <div class="row">
+                  <div class="form-group col-sm-4">
+                    <label for="application" class="label">Application<span class="caption status-danger"><strong>*</strong></span></label>
+                    <ng-select appendTo="body" id="application" [items]="applications" bindValue="id" [(ngModel)] ="selectedApplication" (change)="handelApplicationChangeEvent()" bindLabel="name" formControlName="application">
+                    </ng-select>
+                  </div>
+
+                  <div class="form-group col-sm-4">
+                    <label for="type" class="label">Type de la demande<span class="caption status-danger"><b>*</b></span></label>
+                    <ng-select appendTo="body" id="type" [items]="typeDemandes" bindLabel="libelle" [(ngModel)] = "selectedTd" (change)="handelGetTemplate(selectedTd)" formControlName="typeDemande">
+                    </ng-select>
+                  </div>
+
+                  <div class="form-group col-sm-4">
+                    <label for="roleApplicatif" class="label">Role Applicatif<span class="caption status-danger"><strong>*</strong></span></label>
+                    <nb-select    fullWidth id="roleApplicatif" formControlName="roleApplicatif" multiple>
+                      <!--<nb-option [nbTooltip]="role.description"  *ngFor="let role of roleApplicatif" [value]="role"  >{{role.name}}</nb-option>-->
+                      <nb-option [nbTooltip]="role.description"  *ngFor="let role of roleApplicatif" value="{{role.name}}" (click)="handelAddRoleApplicatif(role)"  >{{role.name}}</nb-option>
+                    </nb-select>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+   <!--         ******************************************* rendu form dynamic *************************************-->
+
+            <div class="row mt-4">
+              <nb-card>
+                <nb-card-header>
+                  <h5>Formulaire {{templateNameForPreview}}</h5>
+                </nb-card-header>
+                <nb-card-body class="d-flex row">
+                  <div class="col-lg-6">
+
+                    <form [formGroup]="genFormGroup"  class="mt-2">
+
+                      <div class="row mb-4">
+
+                        <div class="col-lg-12" *ngFor="let field of formFields ; index as i ">
+                          <h5 class="mb-2 mt-2 fs-6">{{field.label}}</h5>
+
+                          <input  *ngIf="field.inputTp === 'text'" nbInput type="{{field.inputTp}}" placeholder="{{field.placeholder}}"  [formControlName]="field.formCtlName" >
+
+                          <div *ngIf="field.inputTp === 'radio'" >
+                            <nb-radio-group [formControlName]="field.formCtlName">
+                              <nb-radio value="true" [checked]="isSelected === true"> True </nb-radio>
+                              <nb-radio value="false" [checked]="isSelected === false"> False </nb-radio>
+                            </nb-radio-group>
+
+                          </div>
+
+                          <input  *ngIf="field.inputTp === 'date'" nbInput type="date" placeholder="{{field.placeholder}}"  [formControlName]="field.formCtlName" >
+                          <input  *ngIf="field.inputTp === 'number'" nbInput type="number" placeholder="{{field.placeholder}}"  [formControlName]="field.formCtlName" >
+
+
+                          <div *ngIf="genFormGroup.touched" class="text-danger">
+
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['required'] ">
+                              <div *ngFor="let val of field.validators; index as m" >
+                                <span *ngIf="val.valType === 'required'" >{{field.validators[m].description}}  </span>
+                              </div>
+                            </div>
+
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['minlength'] ">
+                              <div *ngFor="let val of field.validators; index as j" >
+                                <span *ngIf="val.valType === 'minLenght'" >{{field.validators[j].description}} {{val.valValue}} </span>
+                              </div>
+                            </div>
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['maxlength'] ">
+
+                              <div *ngFor="let val of field.validators; index as p">
+                                <span *ngIf="val.valType === 'maxLength'" > Champ {{field.validators[p].description}} {{val.valValue}} caractères  </span>
+                              </div>
+                            </div>
+
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['pattern'] ">
+
+                              <div *ngFor="let val of field.validators ; index as k" >
+                                <span *ngIf="val.valSubType === 'email'" >{{field.validators[k].description}}   </span>
+
+                              </div>
+                            </div>
+
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['min'] ">
+
+                              <div *ngFor="let val of field.validators ; index as l" >
+                                <span *ngIf="val.valType === 'min'" >{{field.validators[l].description}} {{val.valValue}}   </span>
+
+                              </div>
+                            </div>
+
+                            <div *ngIf="genFormGroup.controls[field.formCtlName].errors?.['max'] ">
+
+                              <div *ngFor="let val of field.validators ; index as l" >
+                                <span *ngIf="val.valType === 'max'" >{{field.validators[l].description}} {{val.valValue}}   </span>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </form>
+                  </div>
+
+                </nb-card-body>
+              </nb-card>
+
+            </div>
+
+            <!--         ******************************************* rendu form dynamic  end *************************************-->
+
+            <div class="text-center mt-5">
+              <button nbButton nbStepperNext (click)="onFirstSubmit()">Suivant</button>
+              <button nbButton  *ngIf="!isEdit" (click)="addToBasket()" status="warning">Ajouter au panier</button>
+              <button nbButton  *ngIf="isEdit" (click)="updateBasket()" status="warning">Mettre à jour choix</button>
+            </div>
+          </form>
+        </nb-step>
+
+
+        <nb-step [stepControl]="secondForm" label="Validateur">
+          <form [formGroup]="secondForm" class="step-container">
+            <div class="row">
+              <div class="form-group col">
+                <label for="validateur" class="label">Affecter un validateur<span class="caption status-danger"><b>*</b></span></label>
+                <nb-select id="validateur" class="appearance-outline full-width size-medium status-basic shape-rectangle ng-pristine ng-invalid nb-transition status-danger ng-touched" formControlName="assignee" [compareWith]="compareByValueProperty">
+                  <nb-option *ngFor="let user of validators" [value]="user">{{user.firstName}} {{user.lastName}}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="text-center mt-5">
+              <button nbButton nbStepperPrevious>Précédent</button>
+              <button status="primary" nbButton outline (click)="onSubmit()">Soumettre</button>
+            </div>
+          </form>
+        </nb-step>
+        <nb-step [stepControl]="secondForm" [hidden]="true" label="Third step">
+          <div class="step-container">
+            <h3>Formulaire soumis</h3>
+            <button nbButton (click)="stepper.reset()">Créer une nouvelle demande</button>
+          </div>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+
+<!--
+  ************************************* panier Demande Habilitation**************************************-->
+
+
+  <nb-card accent="primary">
+    <nb-card-header>
+      <div class="row justify-content-between">
+        <div class="col card-header">Panier Standard</div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div *ngFor=" let bItem of panierApplicationStandard.basketItemList; let i=index " class="col-sm-4">
+          <nb-card>
+            <nb-card-body class="d-flex justify-content-between">
+              <div>
+                <h5> {{bItem.applicationName}} </h5>
+                <p>Type de demande : <span class="fw-bold">{{bItem.typeDemandeName}}</span> </p>
+                <div >
+                  <p *ngFor="let roleApplicatif of bItem.roleApplicatifList ; let j=index">
+                    Role : <span class="fw-semibold">{{roleApplicatif.name}}</span>
+                  </p>
+                </div>
+                    <p *ngIf="bItem.formHabData.dateDebut"> Date debut : {{bItem.formHabData.dateDebut}}</p>
+                    <p *ngIf="bItem.formHabData.codeProfile">Code profile : {{bItem.formHabData.codeProfile}}</p>
+                    <p *ngIf="bItem.formHabData.dateFin">Date de fin : {{bItem.formHabData.dateFin}}</p>
+                    <p *ngIf="bItem.formHabData.libeleProfile">Libelle profile : {{bItem.formHabData.libeleProfile}}</p>
+                    <p *ngIf="bItem.formHabData.saisieLibre">Saisie libre : {{bItem.formHabData.saisieLibre}}</p>
+                    <p *ngIf="bItem.formHabData.nouvelleFonction">Nouvelle fonctionne : {{bItem.formHabData.nouvelleFonction}}</p>
+                    <p *ngIf="bItem.formHabData.personeAremplacerOuAdupliquer">Personne a remplacer ou a dupliquer : {{bItem.formHabData.personeAremplacerOuAdupliquer}}</p>
+                </div>
+
+              <div >
+                <button nbButton *ngIf="creationMode || isEdit" (click)="handelDeletFromPanier(i,panierApplicationStandard.type)"  > <nb-icon icon="delete-left"></nb-icon></button>
+                <button *ngIf="isEdit" nbButton (click)="handelEditBasketItem(i,panierApplicationStandard.type)"  > <nb-icon icon="edit"></nb-icon></button>
+              </div>
+
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+    </nb-card-footer>
+  </nb-card>
+
+  <nb-card accent="primary">
+    <nb-card-header>
+      <div class="row justify-content-between">
+        <div class="col card-header">Panier Ponctuel</div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+
+
+      <div class="row">
+        <div *ngFor=" let bItem of panierApplicationPonctuel.basketItemList; let i=index " class="col-sm-4">
+          <nb-card>
+            <nb-card-body class="d-flex justify-content-between">
+              <div>
+                <h5> {{bItem.applicationName}} </h5>
+                <p>Type de demande : <span class="fw-bold">{{bItem.typeDemandeName}}</span> </p>
+                <div >
+                  <p *ngFor="let roleApplicatif of bItem.roleApplicatifList ; let j=index">
+                    Role : <span class="fw-semibold">{{roleApplicatif.name}}</span>
+                  </p>
+                </div>
+                <p *ngIf="bItem.formHabData.dateDebut"> Date debut : {{bItem.formHabData.dateDebut}}</p>
+                <p *ngIf="bItem.formHabData.codeProfile">Code profile : {{bItem.formHabData.codeProfile}}</p>
+                <p *ngIf="bItem.formHabData.dateFin">Date de fin : {{bItem.formHabData.dateFin}}</p>
+                <p *ngIf="bItem.formHabData.libeleProfile">Libelle profile : {{bItem.formHabData.libeleProfile}}</p>
+                <p *ngIf="bItem.formHabData.saisieLibre">Saisie libre : {{bItem.formHabData.saisieLibre}}</p>
+                <p *ngIf="bItem.formHabData.nouvelleFonction">Nouvelle fonctionne : {{bItem.formHabData.nouvelleFonction}}</p>
+                <p *ngIf="bItem.formHabData.personeAremplacerOuAdupliquer">Personne a remplacer ou a dupliquer : {{bItem.formHabData.personeAremplacerOuAdupliquer}}</p>
+              </div>
+
+
+              <div >
+                <button nbButton *ngIf="creationMode || isEdit" (click)="handelDeletFromPanier(i,panierApplicationPonctuel.type)"  > <nb-icon icon="delete-left"></nb-icon></button>
+                <button *ngIf="isEdit" nbButton (click)="handelEditBasketItem(i,panierApplicationPonctuel.type)"  > <nb-icon icon="edit"></nb-icon></button>
+              </div>
+
+
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+    </nb-card-footer>
+  </nb-card>
+
+
+
+</div>
+

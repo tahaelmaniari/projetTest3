@@ -1,0 +1,58 @@
+<nb-card accent="primary">
+  <nb-card-header>
+    <div class="row justify-content-between">
+      <div class="col card-header">Liste des Types</div>
+      <div class=" col-sm-3 buttons-row">
+        <button nbButton status="primary" class="float-end" (click)="open($event, false)"><nb-icon icon="plus"></nb-icon>Ajouter</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <table class="w-100 table-hover">
+      <thead>
+      <tr class="h-auto text-white">
+        <th>Libellé</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr   *ngFor="let ref of typeDemandes | paginate : {
+                  itemsPerPage: pageSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        ">
+        <td>{{ref?.libelle}}</td>
+        <td>
+          <div class="text-center">
+            <a (click)="open(ref, true)" style="cursor: pointer"><nb-icon icon="pen-to-square" status="basic"></nb-icon></a>
+            <a class="ms-3" (click)="delete(ref)" style="cursor: pointer"><nb-icon icon="remove" status="basic"></nb-icon></a>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="typeDemandes?.length===0">
+        <td colSpan="10" style="font-size: 0.8rem" class="text-center">Aucun type de demande</td>
+      </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-8">
+        <pagination-controls class="custom-pagination"
+                             previousLabel="Précédent"
+                             nextLabel="Suivant"
+                             (pageChange)="handlePageChange($event)" *ngIf="typeDemandes?.length"
+        ></pagination-controls>
+      </div>
+      <div class="col-md-4" *ngIf="isMoreThanTen()">
+        Nombre d'éléments par page:
+        <nb-select (selectedChange)="handlePageSizeChange($event)" [(selected)]="pageSize" class="bg-white">
+          <nb-option *ngFor="let size of pageSizes" [value]="size">
+            {{ size }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+  </nb-card-footer></nb-card>

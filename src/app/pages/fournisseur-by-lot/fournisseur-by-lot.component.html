@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="chart-container" [chart]="chart"></div>
+    </div>
+    <div class="col-lg-4" *ngIf="status">
+        <ul class="list-group list">
+            <li *ngFor="let a of nb" class="list-group-item">Projets {{a}} : {{status}}</li>
+        </ul>
+        
+    </div>
+</div>
+
+

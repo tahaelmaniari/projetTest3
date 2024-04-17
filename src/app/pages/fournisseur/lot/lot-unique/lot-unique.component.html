@@ -1,0 +1,221 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between mb-4">
+      <div >
+        <h5>Lot Unique</h5>
+      </div>
+      <div>
+      </div>
+    </nb-card-header>
+  
+  </nb-card>
+  
+  <!--************************************** FIRST CARD ROW ****************************-->
+  <!--<div class="row">
+    &lt;!&ndash; ******** card 1 ******** &ndash;&gt;
+    <div class="col-lg-4 mb-2">
+      <div class="card p-0 shadow-lg bg-white rounded-3 " style="overflow: hidden ; padding-bottom: 0px">
+        <div class=" card-body ">
+          <div class="row ">
+            <p class="fs-4">Total Demandes  </p>
+            <h1>66</h1>
+          </div>
+  
+   &lt;!&ndash;       <div class="chart-area"  style="position: relative; ">
+            <canvas id="myLineChart"  #myLineChart  style="margin-left: -10%; margin-right: -10%; ">
+            </canvas>
+  
+          </div>&ndash;&gt;
+          <gh-linechart [gradient]="['rgba(153, 102, 255, 0.8)','rgb(255,255,255)']"></gh-linechart>
+  
+        </div>
+      </div>
+    </div>
+    &lt;!&ndash; ******** card 2 ******** &ndash;&gt;
+    <div class="col-lg-4 mb-2">
+      <div class="card p-0 shadow-lg bg-white rounded-3 " style="overflow: hidden ; padding-bottom: 0px">
+        <div class=" card-body ">
+          <div class="row ">
+            <p class="fs-4">Total en attente  </p>
+            <h1>16</h1>
+  
+          </div>
+  
+  
+          <gh-linechart2 [gradient]="['rgba(43, 224, 133, 0.8)','rgb(255,255,255)']"></gh-linechart2>
+  
+  
+  
+        </div>
+      </div>
+    </div>
+    &lt;!&ndash; ******** card 3 ******** &ndash;&gt;
+  
+    <div class="col-lg-4 mb-2">
+      <div class="card p-0 shadow-lg bg-white rounded-3 " style="overflow: hidden ; padding-bottom: 0px">
+        <div class=" card-body ">
+          <div class="row ">
+            <p class="fs-4">Total en traitée  </p>
+            <h1>50</h1>
+  
+          </div>
+  
+  
+          <gh-linechart3 [gradient]="['rgba(255, 99, 132, 0.8)','rgb(255,255,255)']" ></gh-linechart3>
+  
+  
+  
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  </div>-->
+  <!--************************************** SMALL CARD ROW ****************************-->
+  
+  <!--************************************** SMART TABLE + PIE CHARTS ****************************-->
+  
+  
+  
+  
+  
+    <!-- ******** card 2 ******** -->
+    <div class="row">
+    <div class="col-lg-6 ">
+      <nb-card>
+        <nb-progress-bar [value]="50"></nb-progress-bar>
+  
+        <nb-card-header class="d-flex justify-content-between mb-4">
+          <div >
+            <h5 class="fs-5">Les Articles Bordereaux</h5>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+            <table aria-describedby="app-ref"  class="w-100 table-hover">
+            <thead>
+            <!--         <tr class="h-auto text-white">
+                       <th>Nom</th>
+                       <th>Description</th>
+                       <th>Actions</th>
+                     </tr-->
+            <tr class="h-auto text-white">
+                <th>Code</th>
+              <th>
+                Désignation
+                <!--                      <input nbInput [(ngModel)]="description" (ngModelChange)="getAllApps(1)" placeholder="Description" fullWidth/>-->
+              </th>
+              <th>Unité</th>
+              <th>Quantité</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+  
+            <tbody>
+            <tr>
+              <td>50 - Demolutions</td>
+              </tr>
+              <tr>
+              <td>50.02</td>
+              <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+              <td>F</td>
+              <td>1.00</td>
+              <tr>
+                <td>50.02</td>
+                <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                <td>F</td>
+                <td>1.00</td>
+              </tr>
+              <tr>
+                <td>50.02</td>
+                <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                <td>F</td>
+                <td>1.00</td>
+              </tr>
+              <tr>
+                <td>50.02</td>
+                <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                <td>F</td>
+                <td>1.00</td>
+              </tr>
+              <tr>
+                <td>50.02</td>
+                <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                <td>F</td>
+                <td>1.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </nb-card-body>
+      </nb-card>
+  
+    </div>
+    <div class="col-lg-6">
+        <nb-card>
+            <nb-progress-bar [value]="50"></nb-progress-bar>
+      
+            <nb-card-header class="d-flex justify-content-between mb-4">
+              <div >
+                <h5 class="fs-5">Les Articles Hors Bordereaux</h5>
+              </div>
+            </nb-card-header>
+            <nb-card-body>
+                <table aria-describedby="app-ref"  class="w-100 table-hover">
+                <thead>
+                <!--         <tr class="h-auto text-white">
+                           <th>Nom</th>
+                           <th>Description</th>
+                           <th>Actions</th>
+                         </tr-->
+                <tr class="h-auto text-white">
+                    <th>Code</th>
+                  <th>
+                    Désignation
+                    <!--                      <input nbInput [(ngModel)]="description" (ngModelChange)="getAllApps(1)" placeholder="Description" fullWidth/>-->
+                  </th>
+                  <th>Unité</th>
+                  <th>Quantité</th>
+                  <th></th>
+                </tr>
+                </thead>
+      
+                <tbody>
+                <tr>
+                  <td>50 - Demolutions</td>
+                  </tr>
+                  <tr>
+                  <td>50.02</td>
+                  <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                  <td>F</td>
+                  <td>1.00</td>
+                  <tr>
+                    <td>50.02</td>
+                    <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                    <td>F</td>
+                    <td>1.00</td>
+                  </tr>
+                  <tr>
+                    <td>50.02</td>
+                    <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                    <td>F</td>
+                    <td>1.00</td>
+                  </tr>
+                  <tr>
+                    <td>50.02</td>
+                    <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                    <td>F</td>
+                    <td>1.00</td>
+                  </tr>
+                  <tr>
+                    <td>50.02</td>
+                    <td>Coordination et aide à la pose des autres lots (climatisation,  électricité, colonne téléphonique)</td>
+                    <td>F</td>
+                    <td>1.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </nb-card-body>
+          </nb-card>
+    </div>
+
+    </div>
+  

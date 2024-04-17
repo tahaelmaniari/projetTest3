@@ -1,0 +1,22 @@
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.buttons-row {
+  margin: -0.5rem;
+}
+button[nbButton] {
+  margin: 0.5rem;
+}
+
+.user-modal {
+  min-width: 20rem;
+}
+
+nb-window {
+  width: 50%;
+  height: 75%;
+  overflow-y: auto;
+}
+
+

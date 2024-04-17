@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-6">
+        <div class="chart-container">
+            <canvas  id="MyChart" >{{ chart }}</canvas>
+        </div>
+    </div>
+    <div class="col-6">
+        <div *ngIf="nombreFournisseur">
+        <h5>
+            <span style="color: red;">{{nombreFournisseur}}</span>
+            fournisseurs 
+            <span [ngStyle]="{'color': typeFournisseur === 'Mieux Disant' ? '#58D68D' : '#2E86C1'}">{{ typeFournisseur }}</span>
+            pour le
+            <span style="color: red;">{{projetSelected}}</span>
+        </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngFor="let a of nb">
+                        Fournisseur {{a}}  : 1000 MAD
+                      </li>
+                </ul>
+    </div>
+</div>
+
+

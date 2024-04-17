@@ -1,0 +1,444 @@
+@import 'src/app/@theme/styles/themes';
+
+@import 'node_modules/@nebular/theme/styles/globals';
+@import 'node_modules/bootstrap/scss/mixins/breakpoints';
+@import "@ng-select/ng-select/themes/default.theme.css";
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+html {
+  scroll-behavior: smooth;
+}
+.packRight {
+  float: right;
+  margin-left: 1rem;
+}
+label,
+input,
+div,
+span,
+p {
+  font-family: Source Sans pro, sans-serif;
+}
+.nb-theme-sg .toast-success {
+  background: $status-4 !important;
+}
+
+.nb-theme-sg .toast-error {
+  background: $energy-5 !important;
+}
+.nb-theme-sg .form-control {
+  font-size: 1rem;
+  padding: 5px 10px;
+  background-color: #fff;
+  width: auto;
+
+  border-width: 1px;
+  border-radius: 3px;
+}
+//label, input {
+//  font-size: 1rem;
+//}
+
+fieldset {
+  border-radius: 0.375rem;
+  padding: 10px;
+  position: relative;
+  margin: 15px;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgb(255, 255, 255);
+  //border-radius: 2px;
+  border: 1px solid #ddd;
+}
+legend {
+  width: initial;
+  font-size: 1rem;
+  position: relative;
+  /* background: #282424; */
+  top: -1px;
+  color: #444;
+  right: -2px;
+  margin: 0px 0px 10px;
+  display: block;
+  overflow: hidden;
+  height: 33px;
+  max-width: 200%;
+  padding-top: 7px;
+  border-radius: 3px 3px 0 0;
+  /* background-color: var(--header1-bg); */
+  box-sizing: border-box;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+legend::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 66px;
+  bottom: 2px;
+  -webkit-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+  border-bottom: 3px solid black;
+}
+
+.buttons-row {
+  margin: -0.5rem;
+}
+button[nbButton] {
+  margin: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+
+.nb-theme-sg h1,
+.nb-theme-sg h2,
+.nb-theme-sg h3,
+.nb-theme-sg h4,
+.nb-theme-sg h5,
+.nb-theme-sg h6,
+.nb-theme-sg .h1,
+.nb-theme-sg .h2,
+.nb-theme-sg .h3,
+.nb-theme-sg .h4,
+.nb-theme-sg .h5,
+.nb-theme-sg .h6 {
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+}
+
+.nb-theme-sg nb-card-header::after h1,
+.nb-theme-sg nb-card-header::after h2,
+.nb-theme-sg nb-card-header::after h3,
+.nb-theme-sg nb-card-header::after h4 {
+  height: 3rem;
+}
+
+.nb-theme-sg nb-card-header::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100px;
+  bottom: 3px;
+  left: 35px;
+  transform: translate(0, 100%);
+  -webkit-transition: width 2s;
+  transition: width 2s;
+  transition-timing-function: ease-in;
+  border-bottom: 3px solid $energy-1;
+}
+
+.nb-theme-sg nb-card-header:hover::before {
+  width: 300px;
+}
+.its-form-header {
+  display: flex;
+  justify-content: space-between;
+}
+.its-form-actionbar {
+  display: flex;
+}
+.its-action {
+  background: black !important;
+  color: #fff;
+  padding: 7px 1rem;
+  margin: 0 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  font-weight: normal;
+}
+.its-summary {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  justify-content: space-between;
+  background: #f0f0f4;
+  padding: 10px 1rem;
+  font-size: 1.1rem;
+  border: #ddd8 1px solid;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.its-summary-item {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.its-summary-lbl {
+  font-family: Montserrat, serif;
+  color: $energy-3;
+  font-weight: bold;
+  font-size: .9rem;
+}
+.its-summary-val {
+  color: $status-3;
+  font-size: 1.1rem;
+}
+
+// menu
+.nb-theme-sg nb-menu {
+  > .menu-items > .menu-item > a.active {
+    color: $energy-1 !important;
+    background: rgba($color: #e9041e, $alpha: 0.07);
+    border-left: 3px solid #e9041e;
+  }
+  .menu-item > .menu-items > .menu-item a {
+
+    border-width: 0 0 0 2px !important;
+    border-radius: 0 !important;
+  }
+
+  .menu-item > .menu-items > .menu-item a.active {
+    background-color: inherit !important;
+  }
+
+  > .menu-items > .menu-item > a {
+    text-transform: uppercase !important;
+    //  color: $energy-1 !important;
+    span {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+    }
+    .menu-icon {
+      color: $energy-1 !important;
+    }
+  }
+
+  .menu-items > .menu-item > .menu-items > .menu-item .menu-items {
+    background-color: #f2f2f2 !important;
+    .menu-item {
+      background-color: inherit !important;
+    }
+  }
+
+  .menu-item > .menu-items > .menu-item {
+    padding: 0 !important;
+  }
+}
+
+.ngx-pagination a{
+  text-decoration: none;
+}
+
+.titleAnimation:before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  border: 2px solid #e9041e;
+  animation: progressiveMovingLine 1s ease-in-out forwards;
+}
+
+.ngx-pagination {
+  padding-left: 0px !important;
+}
+
+.ngx-pagination .current {
+  background: $energy-1 !important;
+  border-radius: 20px !important;
+  border: transparent !important;
+}
+
+
+// forms
+
+input:focus {
+  border-color: $status-4 !important;
+}
+
+.nb-theme-sg nb-card-body {
+  overflow: auto !important;
+}
+
+.nb-theme-sg nb-card-header {
+  position: relative;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.nb-theme-sg nb-window {
+  min-width: 70%;
+  height: 90%;
+  overflow-y: auto;
+}
+/*  scroll bar design*/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #edf1f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+/* END: scroll bar design*/
+
+.ngx-daterangepicker {
+  width: auto !important;
+  height: 48px !important;
+  background: #fff;
+  display: inline-block;
+  border: 2px solid #dadfe6 !important;
+  border-radius: 7px;
+  position: relative;
+}
+.ngx-daterangepicker .input-section {
+  height: auto !important;
+}
+.ngx-daterangepicker .input-section .label-txt {
+  color:black !important;
+}
+.ngx-daterangepicker .input-section .cal-icon svg path {
+  fill: #2a2a2a !important;
+
+}
+.ngx-daterangepicker.calendar .side-container {
+
+  min-height: 400px !important;
+  padding: 0 10px !important;
+  align-items: flex-start !important;
+}
+nb-select.appearance-outline.status-basic .select-button {
+  color: #2a2a2a !important;
+  background-color: #fff !important;
+  font-family: Source Sans pro !important;
+  border-radius: .375rem !important;
+}
+
+.ngx-daterangepicker .calendar{
+  zoom:0.8 !important;
+}
+table {
+
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+  line-height: 1.5em;
+  max-width: 100%;
+  overflow: auto;
+  width: 100%;
+  font-size: 1rem;
+  word-break: keep-all;
+  border-color: grey;
+}
+table thead tr {
+  background: #dc3545;
+  color: #fff;
+}
+tbody tr:nth-child(even) {
+  background-color: #f7f9fc;
+}
+
+table tr, table td {
+  font-size: .875em;
+}
+table tr td, table tr th {
+  position: relative;
+  padding: var(--smart-table-padding);
+  border: 1px solid var(--smart-table-separator);
+  vertical-align: middle;
+}
+
+table tbody tr:hover {
+  background: var(--smart-table-separator);
+}
+
+th, td {
+  text-align: left;
+  padding: 0.875rem 1.25rem;
+}
+
+ng2-smart-table thead tr {
+  background: var(--smart-table-header-bg);
+}
+// ng-select
+.ng-input input {
+  font-size: var(--input-medium-text-font-size);
+  font-weight: var(--input-medium-text-font-weight);
+  line-height: var(--input-medium-text-line-height);
+}
+
+.ng-value-label,
+.ng-option-label {
+  font-weight: nb-theme(select-medium-text-font-weight);
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: nb-theme(option-hover-background-color);
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: nb-theme(option-selected-background-color);
+  color: nb-theme(option-selected-text-color);
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked:hover {
+  background-color: nb-theme(option-selected-hover-background-color);
+  color: nb-theme(option-selected-hover-text-color);
+}
+
+.ng-select.ng-select-opened > .ng-select-container {
+  border-color: nb-theme(option-list-border-color);
+}
+
+.ng-select .ng-select-container {
+  border-color: nb-theme(select-outline-basic-border-color);
+}
+
+.ng-select.status-danger .ng-select-container {
+  border-color: nb-theme(input-danger-border-color);
+}
+
+.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  border-color: nb-theme(select-outline-basic-focus-border-color);
+  box-shadow: none;
+}
+
+.ng-select.ng-select-focused.status-danger > .ng-select-container {
+  border-color: nb-theme(input-danger-border-color);
+  box-shadow: none;
+}
+
+.ng-dropdown-panel.ng-select-top {
+  border-bottom-color: nb-theme(option-list-border-color);
+}
+
+.ng-dropdown-panel {
+  border: 1px solid nb-theme(option-list-border-color);
+}
+
+.ng-value-container {
+  .ng-value {
+    white-space: normal !important;
+  }
+}
+
+table thead tbody tr:nth-child(odd) {
+  background-color: #8F9AA5;
+}
+
+#LoadingCard{
+  min-height: 300px;
+}
+
+

@@ -1,0 +1,145 @@
+<nb-card class="m-auto" accent="primary">
+  <nb-card-header class="titleAnimation">
+    <div class="row justify-content-between">
+      <div class="col-auto details ">
+        <h5>Détails de la demande
+          <span class="batch_status batch_status_batch?.processingStatus"> {{request?.status}} </span>
+        </h5>
+      </div>
+      <div class="col-auto">
+        <button class="av-action bg-black text-white" *ngIf="hasRighToDecide() && request.status!='A completer' && request.assignee.provenance =='Siège'" (click)="submit('valider') "><nb-icon class="me-2" icon="check"></nb-icon><span>Valider</span></button>
+        <button class="av-action bg-black text-white" *ngIf="hasRighToDecide() && request.status!='A completer' && request.assignee.provenance =='Réseau'&& request.status != 'A approuver HRBP'" (click)="submit('validerR')"><nb-icon class="me-2" icon="check"></nb-icon><span>Valider</span></button>
+        <button class="av-action bg-black text-white" *ngIf="hasRighToDecide() && request.assignee.provenance =='Réseau'&& request.status == 'A approuver HRBP'" (click)="submit('valider')"><nb-icon class="me-2" icon="check"></nb-icon><span>Valider</span></button>
+        <button class="av-action bg-black text-white" *ngIf="hasRighToDecide()  && request.status!='A completer'" (click)="submit('rejeter')" nbTooltip="Rejeté définitivement la demande. Cette action est irreversible"><nb-icon class="me-2" icon="ban"></nb-icon>Rejeter</button>
+        <button class="av-action bg-black text-white" *ngIf="canComplete()" (click)="submit('retirer')"><nb-icon class="me-2" icon="delete-left"></nb-icon>Retirer</button>
+       <button class="av-action bg-black text-white" *ngIf="canComplete()" (click)="modifier()"><nb-icon class="me-2" icon="pen-to-square"></nb-icon>Modifier</button>
+<!--
+        <button class="av-action bg-black text-white" *ngIf="canComplete()" (click)="modifier()"><nb-icon class="me-2" icon="paper-plane"></nb-icon>Envoyer</button>
+-->
+        <button class="av-action bg-black text-white" *ngIf="hasRighToDecide()  && request.status!='A completer'" (click)="submit('retourner')" nbTooltip="Retourné la demande à l'initiateur"><nb-icon class="me-2" icon="reply"></nb-icon>Retourner</button>
+        <button class="av-action bg-black text-white" *ngIf="(hasRighToDecide() || canReaffect())   && request.status!='A completer'" (click)="submit('reaffecter')"><nb-icon class="me-2" icon="share"></nb-icon>Reaffecter</button>
+        <button class="av-action bg-black text-white" *ngIf="canClaim()" (click)="affect(currentUser, true)"><nb-icon class="me-2" icon="share"></nb-icon>Prendre en charge</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <ng-container *ngIf="state == State.LOADING">
+    <rpa-portal-loading></rpa-portal-loading>
+  </ng-container>
+  <nb-card-body [nbSpinner]="loading">
+    <div class="d-flex flex-lg-column mt-2">
+      <div class="row col-lg-12">
+        <div class="col-lg-4">
+          <h5 class="fs-5">Crée par:</h5>
+          <p class="fw-semibold"> Prénom : <span class="fw-normal">{{request?.initiator?.firstName}}</span> </p>
+          <p class="fw-semibold"> Nom : <span class="fw-normal">{{request?.initiator?.lastName}}</span> </p>
+        </div>
+        <div class="col-lg-4">
+          <h5 class="fs-5">Date de creation</h5>
+          <p class="fs-8">{{request?.initiationDate | date:'dd/MM/yyyy, H:mm'}}</p>
+        </div>
+        <div class="col-lg-4" *ngIf="request?.assignee?.firstName">
+          <h5 class="fs-5">Affecté à:</h5>
+          <p class="fw-semibold"> Prénom : <span class="fw-normal">{{request?.assignee?.firstName}}</span> </p>
+          <p class="fw-semibold"> Nom : <span class="fw-normal">{{request?.assignee?.lastName}}</span> </p>
+        </div>
+
+      </div>
+
+      <div *ngIf="request.message != null || request.message != undefined" class="row-lg-12">
+       <p class="fw-semibold">Motif : <span class="fw-normal">{{request.message}}</span> </p>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+    <!--   ////////////////////////////////////////////////panier Standard ET PONCTUELLE///////////////////////////////////////////////-->
+
+    <nb-card class="mt-4">
+      <nb-card-header>
+        <div class="row justify-content-between">
+          <div class="col card-header">Panier Standard</div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+
+        <div class="row">
+          <div *ngFor=" let bItem of panierApplicationStandard.basketItemList; let i=index " class="col-sm-4">
+            <nb-card>
+              <nb-card-body class="d-flex justify-content-between">
+                <div>
+                  <h5> {{bItem.applicationName}} </h5>
+                  <p>Type de demande : <span class="fw-bold">{{bItem.typeDemandeName}}</span> </p>
+                  <div >
+                    <p *ngFor="let roleApplicatif of bItem.roleApplicatifList ; let j=index">
+                      Role : <span class="fw-semibold">{{roleApplicatif.name}}</span>
+                    </p>
+                  </div>
+                  <p *ngIf="bItem.formHabData.dateDebut"> Date debut : {{bItem.formHabData.dateDebut}}</p>
+                  <p *ngIf="bItem.formHabData.codeProfile">Code profile : {{bItem.formHabData.codeProfile}}</p>
+                  <p *ngIf="bItem.formHabData.dateFin">Date de fin : {{bItem.formHabData.dateFin}}</p>
+                  <p *ngIf="bItem.formHabData.libeleProfile">Libelle profile : {{bItem.formHabData.libeleProfile}}</p>
+                  <p *ngIf="bItem.formHabData.saisieLibre">Saisie libre : {{bItem.formHabData.saisieLibre}}</p>
+                  <p *ngIf="bItem.formHabData.nouvelleFonction">Nouvelle fonctionne : {{bItem.formHabData.nouvelleFonction}}</p>
+                  <p *ngIf="bItem.formHabData.personeAremplacerOuAdupliquer">Personne a remplacer ou a dupliquer : {{bItem.formHabData.personeAremplacerOuAdupliquer}}</p>
+                </div>
+
+                <!--     <div *ngIf="isEditRequestMode">
+                       <button *ngIf="newTemplateFieldList.length !=0 && field.inputTp === 'number'" nbButton type="button" class="m-0 me-2"  (click)="handelDeleteFeild(field,i)"> <nb-icon icon="close" style="width: 15px; height: 15px"> </nb-icon></button>
+                       <button *ngIf="newTemplateFieldList.length !=0 && field.inputTp === 'number' && !activateCreationMode" nbButton type="button" class="m-0" (click)="handelEditFeild(field,i)"> <nb-icon icon="edit" style="width: 15px; height: 15px"> </nb-icon></button>
+
+                     </div>-->
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </nb-card-body>
+
+    </nb-card>
+
+    <nb-card class="mt-4">
+      <nb-card-header>
+        <div class="row justify-content-between">
+          <div class="col card-header">Panier Ponctuelle</div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+
+        <div class="row">
+          <div *ngFor=" let bItem of panierApplicationPonctuel.basketItemList; let i=index " class="col-sm-4">
+            <nb-card>
+              <nb-card-body class="d-flex justify-content-between">
+                <div>
+                  <h5> {{bItem.applicationName}} </h5>
+                  <p>Type de demande : <span class="fw-bold">{{bItem.typeDemandeName}}</span> </p>
+                  <div >
+                    <p *ngFor="let roleApplicatif of bItem.roleApplicatifList ; let j=index">
+                      Role : <span class="fw-semibold">{{roleApplicatif.name}}</span>
+                    </p>
+                  </div>
+                  <p *ngIf="bItem.formHabData.dateDebut"> Date debut : {{bItem.formHabData.dateDebut}}</p>
+                  <p *ngIf="bItem.formHabData.codeProfile">Code profile : {{bItem.formHabData.codeProfile}}</p>
+                  <p *ngIf="bItem.formHabData.dateFin">Date de fin : {{bItem.formHabData.dateFin}}</p>
+                  <p *ngIf="bItem.formHabData.libeleProfile">Libelle profile : {{bItem.formHabData.libeleProfile}}</p>
+                  <p *ngIf="bItem.formHabData.saisieLibre">Saisie libre : {{bItem.formHabData.saisieLibre}}</p>
+                  <p *ngIf="bItem.formHabData.nouvelleFonction">Nouvelle fonctionne : {{bItem.formHabData.nouvelleFonction}}</p>
+                  <p *ngIf="bItem.formHabData.personeAremplacerOuAdupliquer">Personne a remplacer ou a dupliquer : {{bItem.formHabData.personeAremplacerOuAdupliquer}}</p>
+                </div>
+
+
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </nb-card-body>
+
+    </nb-card>
+
+    <!--   ////////////////////////////////////////////////panier Standard ET PONCTUELLE///////////////////////////////////////////////-->
+
+  </nb-card-body>
+</nb-card>

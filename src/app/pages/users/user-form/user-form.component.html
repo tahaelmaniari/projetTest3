@@ -1,0 +1,69 @@
+<div>
+  <form [formGroup]="userForm">
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="matricule">Matricule<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="matricule" fullWidth placeholder="Matricule" formControlName="matricule"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="lastname">Nom<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="lastname" fullWidth placeholder="Nom" formControlName="lastName"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="firstname">Prénom<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="firstname" fullWidth placeholder="Prénom" formControlName="firstName"/>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="label col-sm-3 col-form-label" for="email">Email<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="email" fullWidth placeholder="Email" formControlName="email"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-sm-3 col-form-label" for="provenance">Provenance<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <nb-radio-group id="provenance" class="row" (valueChange)="initChangeListener($event)"
+                        name="provenance"
+                        formControlName="provenance">
+          <nb-radio class="col ms-2" *ngFor="let provenance of provenances" [value]="provenance">{{provenance}}</nb-radio>
+        </nb-radio-group>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="role">Roles<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <nb-select id="role" fullWidth placeholder="Roles" formControlName="authorities" multiple>
+          <nb-option *ngFor="let role of roles" [value]="role">{{role}}</nb-option>
+        </nb-select>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="userForm?.get('provenance')?.value==='Siège'">
+      <label class="label col-form-label col-sm-3" for="manager">Manager<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="manager" fullWidth placeholder="Matricule du manager" formControlName="matriculeManager"/>
+      </div>
+    </div>
+    <div class="form-group row"  *ngIf="userForm?.get('provenance')?.value==='Siège'">
+      <label class="label col-form-label col-sm-3" for="entite">Entité<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="entite" fullWidth placeholder="Entité" formControlName="entite"/>
+      </div>
+    </div>
+    <div class="form-group row"  *ngIf="userForm?.get('provenance')?.value!=='Siège'">
+      <label class="label col-form-label col-sm-3" for="delegationRegionale">Direction régionale<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="delegationRegionale" fullWidth placeholder="Délégation Regionale" formControlName="delegationRegionale"/>
+      </div>
+    </div>
+    <div class="buttons-row float-end">
+      <button nbButton>Annuler</button>
+      <button type="submit" nbButton class="ml-2" (click)="onSubmit()">Enregistrer</button>
+    </div>
+  </form>
+
+</div>

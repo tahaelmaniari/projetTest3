@@ -1,0 +1,44 @@
+{
+  "/users": {
+      "target": "http://localhost:8085",
+      "secure": false,
+      "changeOrigin": false,
+      "logLevel": "debug"
+  },
+  "/requests": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  },
+  "/applications": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  },
+  "/templates": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  },
+  "/types-demandes": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  },
+  "/forms/api/v1": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  },
+  "/template/**": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  }
+}

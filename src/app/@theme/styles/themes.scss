@@ -1,0 +1,76 @@
+@forward 'node_modules/@nebular/theme/styles/theming';
+@use 'node_modules/@nebular/theme/styles/theming' as *;
+@use 'node_modules/@nebular/theme/styles/themes/default';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+$nb-enable-css-custom-properties: true;
+$energy-1: #E9041E;
+$energy-2: #F80116;
+$energy-3: #EE3B45;
+$energy-4: #E55F50;
+$energy-5: #C6361B;
+$energy-6: #FFFFFF;
+$energy-7: #EB2D90;
+
+$status-1: #000000;
+$status-2: #250708;
+$status-3: #391325;
+$status-4: #002B2F;
+$status-5: #330072;
+$status-6: #010035;
+
+$nb-themes: nb-register-theme(
+    (
+      sidebar-header-gap: 2rem,
+      sidebar-header-height: initial,
+      layout-content-width: 1400px,
+      header-height: 5rem,
+      color-primary-100: #FDD8CB,
+      color-primary-200: #FCA999,
+      color-primary-300: #F87065,
+      color-primary-400: #F13F43,
+      color-primary-500: #DC3545,
+      color-primary-600: #C8022B,
+      color-primary-700: #A70233,
+      color-primary-800: #870135,
+      color-primary-900: #6F0036,
+      color-primary: $status-3,
+      color-success: $energy-1,
+      color-danger: $energy-5,
+      color-info: $status-3,
+      color-warning: $energy-4,
+      link-color: color-primary,
+      color-fg-highlight: color-success,
+      link-color-hover: color-success,
+      link-color-visited: link-color,
+      user-fg-highlight: $energy-1,
+      menu-icon-font-size: 2rem,
+      switcher-background: #ebeff5,
+      switcher-background-percentage: 50%,
+      drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79),
+      scrollbar-fg: $status-6,
+      text-button-large-font-size: 1.1rem,
+      input-basic-focus-border-color:color-info-400,
+      input-basic-background-color: background-basic-color-1,
+      input-basic-hover-background-color: background-basic-color-1,
+      select-outline-basic-background-color: background-basic-color-1,
+      select-outline-basic-hover-background-color: background-basic-color-1,
+      select-outline-basic-focus-border-color:color-info-400,
+      sidebar-width: 17.5rem,
+      toastr-danger-background-color:	#FF0000,
+      toastr-danger-border-color:	#FF0000,
+      toastr-icon-danger-color:	#FF0000,
+      badge-danger-background-color:#FF0000,
+      toastr-destroyable-danger-hover-background-color:	#FF0000,
+      toastr-destroyable-danger-hover-border-color:	#FF0000,
+      radio-basic-disabled-checked-inner-circle-color:color-primary-500,
+      radio-basic-disabled-checked-border-color:color-primary-500,
+      text-disabled-color:var(--input-basic-text-color),
+      font-main: Poppins-Regular,
+      font-secondary: "Montserrat",
+      font-family-primary: "Montserrat",
+      //text-subtitle-2-font-size: rem,
+    ),
+    sg,
+    default
+);

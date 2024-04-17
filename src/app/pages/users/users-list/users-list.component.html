@@ -1,0 +1,93 @@
+<nb-card accent="primary">
+  <nb-card-header>
+    <div class="row justify-content-between">
+      <div class="col card-header">Liste des utilisateurs</div>
+      <div class="col">
+        <button nbButton status="primary" class="float-end" (click)="open(false)"><nb-icon icon="plus"></nb-icon>Ajouter</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <table aria-describedby="users-list" class="w-100 table-hover overflow-scroll">
+      <thead>
+      <tr class="h-auto text-white">
+        <th scope="col" >Matricule</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Provenance</th>
+        <th scope="col">Entité</th>
+        <th scope="col">Délégation régionale</th>
+        <th scope="col">Actions</th>
+      </tr>
+      <tr >
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Matricule" class="w-100 form-control" [(ngModel)]="matricule" (ngModelChange)="getAllUsers()"/>
+        </th>
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Nom" class="w-100 form-control" [(ngModel)]="lastname" (ngModelChange)="getAllUsers()"/>
+        </th>
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Prénom" class="w-100 form-control" [(ngModel)]="firstname" (ngModelChange)="getAllUsers()"/>
+        </th >
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Email" class="w-100 form-control" [(ngModel)]="email" (ngModelChange)="getAllUsers()"/>
+        </th>
+        <th scope="col" class="ng2-smart-table-filter">
+          <nb-select id="provenance" fullWidth placeholder="Provenance" class="bg-white w-100" [(selected)]="provenance" (selectedChange)="getAllUsers()">
+            <nb-option *ngFor="let provenance of provenances" [value]="provenance">{{provenance}}</nb-option>
+          </nb-select>
+        </th>
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Entité" class="w-100 form-control" [(ngModel)]="entite" (ngModelChange)="getAllUsers()"/>
+        </th>
+        <th scope="col" class="ng2-smart-table-filter">
+          <input type="text" placeholder="Délégation régionale" class="w-100 form-control" [(ngModel)]="delegationRegionale" (ngModelChange)="getAllUsers()"/>
+        </th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let user of users | paginate : {
+                  itemsPerPage: pageSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
+           [class.active]="i == currentIndex">
+        <td>{{user?.matricule}}</td>
+        <td>{{user?.lastName}}</td>
+        <td>{{user?.firstName}}</td>
+        <td>{{user?.email}}</td>
+        <td>{{user?.provenance}}</td>
+        <td>{{user?.entite}}</td>
+        <td>{{user?.delegationRegionale}}</td>
+        <td><a  (click)="open( true, user)" style="cursor: pointer"><nb-icon icon="pen-to-square" pack="far" status="basic"></nb-icon></a></td>
+      </tr>
+      <tr *ngIf="users?.length===0">
+        <td colSpan="10" style="font-size: 0.8rem" class="text-center">Aucun utilisateur trouvé</td>
+      </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-8">
+        <pagination-controls class="custom-pagination"
+                             previousLabel="Précédent"
+                             nextLabel="Suivant"
+                             (pageChange)="handlePageChange($event)" *ngIf="users?.length"
+        ></pagination-controls>
+      </div>
+      <div class="col-md-4" *ngIf="isMoreThanTen()">
+        Nombre d'éléments par page:
+        <nb-select (selectedChange)="handlePageSizeChange($event)" [(selected)]="pageSize" class="bg-white">
+          <nb-option *ngFor="let size of pageSizes" [value]="size">
+            {{ size }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

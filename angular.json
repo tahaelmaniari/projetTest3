@@ -27,9 +27,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/app/@theme/styles/styles.scss",
+              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/keycloak-js/dist/keycloak.js",
+              "node_modules/pace-js/pace.min.js"
+            ]
           },
           "configurations": {
             "production": {

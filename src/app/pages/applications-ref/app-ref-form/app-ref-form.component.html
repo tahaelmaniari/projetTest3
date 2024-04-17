@@ -1,0 +1,118 @@
+<div style="min-width: 75%" >
+  <form [formGroup]="applicationForm">
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="name">Nom de l'application<span class="caption status-danger"><b>*</b></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="name" fullWidth placeholder="Nom de l'application" formControlName="name"/>
+        <div class="text-danger">
+          <div *ngIf="applicationForm.controls['name'].errors?.['maxlength'] && applicationForm.touched">
+            <span class="ms-2">Champ ne doit pas dépasser 255 caractères </span>
+          </div>
+          <div *ngIf="applicationForm.controls['name'].errors?.['required'] && applicationForm.touched">
+            <span class="ms-2">Champ obligatoire </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="name">Description</label>
+      <div class="col-sm-9">
+        <textarea nbInput id="description" fullWidth placeholder="Description" formControlName="description"></textarea>
+        <div class="text-danger">
+          <div *ngIf="applicationForm.controls['description'].errors?.['maxlength'] && applicationForm.touched">
+            <span class="ms-2">Champ ne doit pas dépasser 255 caractères </span>
+          </div>
+          <div *ngIf="applicationForm.controls['description'].errors?.['required'] && applicationForm.touched">
+            <span class="ms-2">Champ obligatoire </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="name">Type de demande <span class="caption status-danger"><b>*</b></span></label>
+      <div class="col-sm-9">
+        <nb-select fullWidth placeholder="Selectionez un type de demande " formControlName="template" multiple>
+          <nb-option *ngFor="let td of typeDeDemandes"  (click)="handelAddTypeDeDemande(td)" value="{{td.id}}">{{td.libelle}}</nb-option>
+        </nb-select>
+
+        <div class="text-danger">
+          <div *ngIf="applicationForm.controls['template'].errors?.['required'] && applicationForm.touched">
+            <span class="ms-2">Champ obligatoire </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+ <!--   *************************** role section *********************************-->
+
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="name">Nom du Role <span class="caption status-danger"><b>*</b></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="name" fullWidth placeholder="Nom de l'application"  formControlName="roleName"/>
+        <div class="text-danger">
+          <div *ngIf="applicationForm.controls['roleName'].errors?.['maxlength'] && applicationForm.touched">
+            <span class="ms-2">Champ ne doit pas dépasser 255 caractères </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="name">Description du Role</label>
+      <div class="col-sm-9">
+        <textarea nbInput id="description" fullWidth placeholder="Description"  formControlName="roleDescription"></textarea>
+        <div class="text-danger">
+          <div *ngIf="applicationForm.controls['roleDescription'].errors?.['maxlength'] && applicationForm.touched">
+            <span class="ms-2">Champ ne doit pas dépasser 255 caractères </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" d-flex row col-lg-12 align-items-end justify-content-end" id="add-role" >
+      <button class="col-sm-2 " nbButton status="warning" (click)="addRole()">Ajouter un Role</button>
+    </div>
+
+
+
+
+
+    <!--   *************************** role section *********************************-->
+    <div class="d-flex flex-column">
+      <div class="row mb-3">
+        <h5> List des Roles Ajouté</h5>
+      </div>
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let roleApplicatif of  listRoleApplicatif; let i=index">
+          <nb-card>
+            <nb-card-body class="d-flex justify-content-between">
+              <div>
+                <p><span class="fw-bold">Nom Role : </span> <span class="fw-semibold">{{roleApplicatif.name}} </span></p>
+                <p><span class="fw-bold">Description :  </span> <span class="fw-semibold">{{roleApplicatif.description}} </span></p>
+              </div>
+              <div>
+                <div >
+                  <button nbButton (click)="handelDeleteRole(i)"  > <nb-icon icon="delete-left"></nb-icon></button>
+                </div>
+              </div>
+
+
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="buttons-row float-end mt-4">
+      <button nbButton status="primary" (click)="cancel()">Annuler</button>
+      <button *ngIf="!isEdit" nbButton status="primary" class="ml-2" (click)="submit()">Enregistrer</button>
+      <button *ngIf="isEdit" nbButton status="primary" class="ml-2" [disabled]="mettreAjourBtnDisabled" (click)="updateApplication()">Mettre à jour</button>
+    </div>
+  </form>
+
+</div>

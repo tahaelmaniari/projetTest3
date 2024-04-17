@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-body>
+      <div>
+        Êtes vous sur de vouloir supprimer ce referentiel? Cette action est irreversible
+      </div>
+      <div class="buttons-row text-center mt-3">
+        <button class="cancel" nbButton status="secondary" (click)="submit(false)" >Annuler</button>
+        <button nbButton status="primary" (click)="submit(true)">Confirmer</button>
+      </div>
+    </nb-card-body>
+
+</nb-card>

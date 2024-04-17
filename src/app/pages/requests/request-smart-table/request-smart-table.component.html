@@ -1,0 +1,95 @@
+<nb-card accent="primary">
+  <nb-card-header>
+    <div class="row">
+      <div class="col-9">Historiques de demandes</div>
+      <div class="col-3" *ngIf="source.length>0">
+        <button nbButton class="bg-black text-white float-end mt-0 me-0" (click)="onDownloadCSV()">
+          <i class="fa fa-table me-2" aria-hidden="true"></i>Exporter en CSV
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body >
+    <div style="overflow-x: scroll">
+      <table aria-describedby="historique" class="w-100 table-hover">
+        <thead>
+        <tr class="h-auto text-white">
+    <!--      <th scope="col">Type</th>-->
+          <th scope="col">Initiateur</th>
+          <th scope="col" *ngIf="!isFinalState()">Actuellement affecté à <span class="ms-5"><nb-checkbox  *ngIf="criteria?.status?.includes('A approuver RH')" (checkedChange)="getMyRequests($event)" status="control">Moi</nb-checkbox></span></th>
+          <th scope="col">Date de demande</th>
+     <!--     <th scope="col">Application concernée</th>-->
+          <th scope="col" *ngIf="statuss.length>1 || criteria.status?.includes('En cours')">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+        <tr>
+   <!--       <th scope="col">
+            <ng-select id="type" appendTo="body" [items]="typeDemandes" bindLabel="libelle" placeholder="Type de demande" [(ngModel)]="typeDemande" (change)="loadRequestsByCriteria(1)" >
+            </ng-select>
+          </th>-->
+          <th scope="col">
+            <input type="text" placeholder="Initiateur" class="w-100 form-control" [(ngModel)]="initiatorName" (ngModelChange)="loadRequestsByCriteria(1)"/>
+          </th>
+          <th scope="col">
+            <input type="text" placeholder="Affecté à" class="w-100 form-control" [(ngModel)]="assigneeName" (ngModelChange)="loadRequestsByCriteria(1)"/>
+          </th>
+          <th scope="col"><input  class="w-100" id="dateDeDemande" nbInput fullWidth
+                      placeholder="Date de demande"
+                      [nbDatepicker]="rangepicker">
+            <nb-rangepicker #rangepicker [(range)]="initiationDate" (rangeChange)="loadRequestsByCriteria(1)"></nb-rangepicker>
+          <th scope="col">
+          <ng-select appendTo="body" [items]="applications" bindLabel="name" placeholder="Application" [(ngModel)]="application" (change)="loadRequestsByCriteria(1)" >
+          </ng-select>
+          <th *ngIf="statuss.length>1 || criteria.status?.includes('En cours')" scope="col">
+          <nb-select fullWidth placeholder="Status" class="bg-white w-100" [(selected)]="status" (selectedChange)="loadRequestsByCriteria(1)">
+              <nb-option *ngIf="source.length>0">Tout</nb-option>
+            <nb-option *ngFor="let status of statuss" [value]="status">{{status}}</nb-option>
+          </nb-select></th>
+          <!--<th scope="col"></th>-->
+        </tr>
+        </thead>
+        <tbody [nbSpinner]="loading">
+        <tr  *ngFor="let request of source | paginate : {
+                  itemsPerPage: pageSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
+             [class.active]="i == currentIndex">
+       <!--   <td>{{request.typeDemande?.libelle}}</td>-->
+          <td>{{request.initiator?.firstName}} {{request.initiator?.lastName}}</td>
+          <td>{{request.assignee?.firstName}} {{request.assignee?.lastName}}</td>
+          <td>{{request.initiationDate | date:'dd/MM/yyyy, H:mm'}}</td>
+        <!--  <td>{{request.application.name}}</td>-->
+          <td *ngIf="statuss.length>1 || criteria.status?.includes('En cours')"><p [ngClass]="{'m-auto text-center rounded-5 px-1 text-white mx-5 p-1': true, 'bg-primary': request?.status==='A approuver RH', 'bg-success': request?.status==='A approuver validateur', 'bg-warning':request?.status==='A completer', 'bg-danger':request?.status==='Rejetée', 'bg-secondary':request?.status==='Retirée', 'bg-black':request?.status==='Cloturée'}"  >{{request.status}}</p></td>
+          <td><a [href]="'/pages/demandes/read/'+request.id"><nb-icon icon="arrow-up-right-from-square" status="basic"></nb-icon></a></td>
+        </tr>
+        <tr *ngIf="source?.length===0">
+          <td colSpan="10" style="font-size: 0.8rem" class="text-center">Aucune demande</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-8">
+        <pagination-controls class="custom-pagination"
+                             previousLabel="Précédent"
+                             nextLabel="Suivant"
+                             (pageChange)="handlePageChange($event)" *ngIf="source?.length && !isOnePage"
+        ></pagination-controls>
+      </div>
+      <div class="col-md-4" *ngIf="isMoreThanTen() || !isOnePage">
+        Nombre d'éléments par page:
+        <nb-select (selectedChange)="handlePageSizeChange($event)" [(selected)]="pageSize" class="bg-white">
+          <nb-option *ngFor="let size of pageSizes" [value]="size">
+            {{ size }}
+          </nb-option>
+        </nb-select>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>
+

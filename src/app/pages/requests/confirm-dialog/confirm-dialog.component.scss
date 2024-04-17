@@ -1,0 +1,30 @@
+.autocomplete {
+  background-color: #fff;
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  max-height: 122px;
+  width: 100%;
+  margin: 0;
+  overflow: auto;
+  transform: translateY(8px);
+  position: absolute;
+  z-index: 1;
+}
+
+.typeHead{
+  position: relative;
+  display: block;
+
+  ul{
+    background: #fff;
+    li{
+      list-style-type:none;
+      padding: 6px 18px;
+      margin-left: -40px;
+      cursor: pointer;
+    }
+    :hover{
+      background:#ccc;
+    }
+  }
+}

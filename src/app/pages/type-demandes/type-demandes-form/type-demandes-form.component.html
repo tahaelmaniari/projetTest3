@@ -1,0 +1,22 @@
+<div style="min-width: 75%" >
+  <form [formGroup]="typeDemandeForm">
+    <div class="form-group row">
+      <label class="label col-form-label col-sm-3" for="libelle">Libellé<span class="caption status-danger"><strong>*</strong></span></label>
+      <div class="col-sm-9">
+        <input nbInput id="libelle" fullWidth placeholder="Libellé" formControlName="libelle"/>
+        <div class="text-danger">
+          <div *ngIf="typeDemandeForm.controls['libelle'].errors?.['maxlength'] && typeDemandeForm.touched">
+            <span class="ms-2">Champ ne doit pas dépasser 255 caractères </span>
+          </div>
+          <div *ngIf="typeDemandeForm.controls['libelle'].errors?.['required'] && typeDemandeForm.touched">
+            <span class="ms-2">Champ obligatoire </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons-row float-end">
+      <button nbButton status="primary" (click)="cancel()">Annuler</button>
+      <button nbButton status="primary" class="ml-2" (click)="submit()">Enregistrer</button>
+    </div>
+  </form>
+</div>
