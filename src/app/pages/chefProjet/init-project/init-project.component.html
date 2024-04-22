@@ -6,17 +6,36 @@
   </nb-card-header>
 
 </nb-card>
-<div class="col-lg-6">
-  <h5 class="mb-4 fs-6">Nouveau Projet</h5>
-  <input nbInput type="text"  placeholder="Nouveau Projet..."  [(ngModel)]="projet" >
-</div>
-
 
   <div class="row mt-4 col-lg-12">
     <form action="" (submit)="addProjet()">
-      <div class="col-lg-8">
+      <div class="col-lg-6">
+        <h5 class="fs-6">Code Projet</h5>
+        <input nbInput type="text"  placeholder="Code Projet..."  [(ngModel)]="code" >
+      </div>
+      <div class="col-lg-6">
+        <h5 class="fs-6">Nom Projet</h5>
+        <input nbInput type="text"  placeholder="Nouveau Projet..."  [(ngModel)]="nom" >
+      </div>
+      <div class="col-lg-6">
+        <h5 class="fs-6">Etat Projet</h5>
+        <select [(ngModel)]="etat" >
+          <option value="Initiation Projet">Initiation Projet</option>
+          <option value="Enrichissement Données">Enrichissement Données</option>
+          <option value="Attente Retour(Achat Delegue)">Attente Retour(Achat Delegue)</option>
+          <option value="Adjudication">Adjudication</option>
+          <option value="Attente Retour (Fournisseur)">Attente Retour (Fournisseur)</option>
+          <option value="Lancement P2P">Lancement P2P</option>
+        </select>
+      </div>
+      <div class="col-lg-6">
+        <h5 class="fs-6">Budget</h5>
+        <input nbInput type="number"  placeholder="Budget..."  [(ngModel)]="budget" >
+      </div>
+
+      <div class="col-lg-8 mt-4">
         <div class="mb-3">
-         <label for="formFileMultiple" class="form-label">Fichiers à selectionner</label>
+         <label for="formFileMultiple" class="form-label">Documents Projets</label>
          <input class="form-control" type="file" (change)="onFileSelected($event)"multiple>
        </div>
         <br>

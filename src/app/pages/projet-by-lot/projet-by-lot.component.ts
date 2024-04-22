@@ -19,18 +19,14 @@ export class ProjetByLotComponent implements OnInit {
   },
   xAxis:{
   categories:[
-  'Janv',
-  'Février',
-  'Mars',
-  'Avril',
-  'Mai',
-  'Juin',
-  'Juillet',
-  'Aout',
-  'Septembre',
-  'Octobre',
-  'Novembre',
-  'Decembre'
+    '2017',
+    '2018',
+    '2019',
+    '2020',
+    '2021',
+    '2022',
+    '2023',
+    '2024',
   ]
   },
   yAxis: {
@@ -40,22 +36,10 @@ export class ProjetByLotComponent implements OnInit {
   },
   series: [
   {
-  name: 'Projet 1',
+  name: 'Budget Annuel',
   type:'line',
   color:'#2E86C1',
-  data: [1,2,3,4,5,6,7,8,9,10,11,12]
-  },
-  {
-  name: 'Projet 2',
-  type:'line',
-  color:'#A569BD',
-  data: [1,4,5,10,11,6,6]
-  },
-  {
-  name: 'Projet 3',
-  type:'line',
-  color:'#34495E',
-  data: [1,1,1,6,6,7,7,9,12,12]
+  data: [100,250,280,300,500]
   },
   ],
   credits: {

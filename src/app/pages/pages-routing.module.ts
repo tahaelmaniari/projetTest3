@@ -19,8 +19,10 @@ import { EstimationArticle1Component } from './acheteur/estimation-article1/esti
 import { ProjetByLotComponent } from './projet-by-lot/projet-by-lot.component';
 import { EvolutionProjetLotComponent } from './evolution-projet-lot/evolution-projet-lot.component';
 import { MapComponent } from './map/map.component';
-import { AuthGuard } from '../services/auth.guard';
 import { ProjetsComponent } from './projets/projets.component';
+import { AnotherMapComponent } from './another-map/another-map.component';
+import { FournisseursComponent } from './projets/fournisseurs/fournisseurs.component';
+import { StatusProjetComponent } from './status-projet/status-projet.component';
 
 const routes: Routes = [
   {
@@ -36,8 +38,23 @@ const routes: Routes = [
         component: ListFournisseurComponent,
       },
       {
+        path:'status-projet',component:StatusProjetComponent
+      },
+      {
         path: 'projets',
         component: ProjetsComponent,
+      },
+      {
+        path: 'projets/:status/:nombreProjet',
+        component: ProjetsComponent,
+      },
+      {
+        path: 'projets/:nombreFournisseur/:typeFournisseur/projetSelected',
+        component: FournisseursComponent,
+      },
+      {
+        path: 'another-map',
+        component: AnotherMapComponent,
       },
       {
         path: 'list-fournisseur-projet1',

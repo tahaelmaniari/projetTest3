@@ -9,7 +9,7 @@ import {mapOneOrManyArgs} from "rxjs/internal/util/mapOneOrManyArgs";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  username!: string
+  username = 'TIJANI Fadwa'
 
   constructor(private sidebarService: NbSidebarService) { }
   protected layoutSize$ = new Subject();

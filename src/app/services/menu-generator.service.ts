@@ -13,7 +13,7 @@ export class MenuGeneratorService {
   getMenuItems(): Observable<NbMenuItem[]> {
     let authorities = this.userService.getUserProfile().roles;
     let items: NbMenuItem[]=[];
-    if(authorities){
+    if(true){
       items= [
         ...this.pilotageMenuItem(authorities),
         ...this.initiatorMenuItems(authorities),
@@ -21,8 +21,6 @@ export class MenuGeneratorService {
         ...this.finalMenuItems(authorities),
         ...this.usersMenuItems(authorities),
         ... this.refMenuItems(authorities)
-
-
       ]
     }
 
@@ -34,18 +32,18 @@ export class MenuGeneratorService {
       let mt: NbMenuItem={
         title: 'Pilotage',
         icon: {
-          icon: 'chart-line',
-          pack: 'fas',
+          icon: 'shapes',
+          pack: 'fas'
         },
-        children: [],
+          children: [],
       }
       mt.children?.push({
         title: 'Tableau de bord',
-        icon: '',
+        icon: 'star',
         link: '/pages/pilotage'
       },{
         title: 'Toutes les demandes',
-        icon: '',
+        icon: 'star',
         link: '/pages/demandes/tout'
       })
       return [mt]

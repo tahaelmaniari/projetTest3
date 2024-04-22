@@ -16,7 +16,11 @@ interface MenuItem {
   styleUrls: ['./init-project.component.css']
 })
 export class InitProjectComponent implements OnInit {
-  projet! : string
+    code!: number
+    nom! : string
+    etat! : string
+    budget!:string
+    nombreFournisseur!: number
   files: File[] = [];
 
    children = this.files.map(file => ({
@@ -29,9 +33,12 @@ export class InitProjectComponent implements OnInit {
   constructor(private toastr : NbToastrService,private router : Router){
   }
   ngOnInit(): void {
+    console.log(this.nom)
   }
   onFileSelected(event: any): void {
   this.files = Array.from(event.target.files);
+
+
   }
  
   upload(): void {
@@ -39,56 +46,20 @@ export class InitProjectComponent implements OnInit {
   }
 
 
-
+validation()
+{
+  if(this.code == null || this.nom == null || this.etat == null || this.budget == null)
+    return false;
+  return true;
+}
 
   addProjet():void{
-    if(this.projet == '' || this.files.length == 0)
+    if(!this.validation())
       this.toastr.danger('Veuillez saisir tous les informations ', "Error", {duration: 10000})
     else{
-      const projets = MENU_ITEMS.find(i => i.title == 'Projets')
-      if(projets)
-        {
-          projets.children?.push(      {
-            title: this.projet,
-            icon: 'list-outline',
-            expanded: true,
-            children: [
-              {
-                title: "Lot Unique",
-                icon: 'star',
-                link: "/pages/lot-unique"
-              },
-              {
-                title: 'Lot Electricite',
-                link: "/pages/lot-electricite",
-                icon: 'star',
-              },
-              {
-                title: 'Lot Climatisation',
-                link: '/pages/lot-climatisation',
-                icon: 'star',
-              },
-              {
-                title: 'Fournisseur',
-                link: '/pages/list-fournisseur-projet1',
-                icon: 'star',
-              },
-              {
-                title: 'Documents',
-                link: '/pages/list-fournisseur-projet1',
-                icon: 'star',
-                children: this.files.map(file => ({
-                  title: file.name,
-                  link: '/pages/' + file.name.toLowerCase().replace(/\s+/g, '-'),
-                  icon:'star'
-              }))
-              },
-            ],
-          },)
-        }
       this.toastr.success('Les données projets sont bien ajoutés ', "Success", {duration: 10000})
-      this.router.navigate(['/pages/pilotage']);
+      //this.router.navigate(['/pages/pilotage']);
     }
   }
+  }
 
-}

@@ -12,7 +12,7 @@ export class EvolutionProjetLotComponent implements OnInit{
   nombreFournisseur!: any
   projetSelected !: any
   typeFournisseur : any
-  nb : any;
+  nb : any = null;
 
 
   constructor() { }

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'angular-highcharts';
- 
 @Component({
-  selector: 'app-fournisseur-by-lot',
-  templateUrl: './fournisseur-by-lot.component.html',
-  styleUrls: ['./fournisseur-by-lot.component.css']
+  selector: 'app-status-projet',
+  templateUrl: './status-projet.component.html',
+  styleUrls: ['./status-projet.component.css']
 })
-export class FournisseurByLotComponent implements OnInit {
+export class StatusProjetComponent implements OnInit {
   status: any;
   chart: Chart;
   nb : any
@@ -45,32 +44,32 @@ export class FournisseurByLotComponent implements OnInit {
             {
               name: 'Initiation Projet',
               y: 2,
-              color: '#DED592'
+              color: '#D9E5F5'
             },
             {
               name: 'Enrichissement Données',
               y: 4,
-              color: '#2E86C1'
+              color: '#65AED9'
             },
             {
               name: 'Attente Retour (Achat Délégué)',
               y: 3,
-              color: '#2E86C1'
+              color: '#81C4E8'
             },
             {
               name: 'Adjudication',
               y: 4,
-              color: '#CF1254'
+              color: '#278FB6'
             },
             {
               name: 'Attente Retour (Fournisseur)',
               y: 4,
-              color: '#E918E3'
+              color: '#EFF8FB'
             },
             {
               name: 'Lancement P2P',
               y: 3,
-              color: '#A569BD'
+              color: '#4E67B0'
             },
           ],
         }
@@ -96,4 +95,5 @@ export class FournisseurByLotComponent implements OnInit {
   ngOnInit(): void {
     this.nb = Array.from({length: 5}, (_, index) => index + 1);
   }
+
 }

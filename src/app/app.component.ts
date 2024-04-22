@@ -13,5 +13,8 @@ export class AppComponent {
     this.iconLibraries.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
     this.iconLibraries.registerFontPack('fab', { packClass: 'fab', iconClassPrefix: 'fa' });
     this.iconLibraries.setDefaultPack('fas');
-  }
+    //this.iconLibraries.registerFontPack('ri',{iconClassPrefix:'ri'})
+    //this.iconLibraries.setDefaultPack('ri')
+}
+
 }

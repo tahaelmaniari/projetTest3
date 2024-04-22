@@ -1,12 +1,23 @@
 <nb-card>
     <nb-card-header class="d-flex justify-content-between mb-4">
       <div >
-        <h5>Liste des Fournisseurs</h5>
+        <h5>Liste des Projets
+          <span *ngIf="status !== 0">{{status}}</span>
+        </h5>
       </div>
       <div>
+        <nb-select [(ngModel)]="status" (selectedChange)="choice()">
+          <nb-option value="Initiation Projet">Initiation Projet</nb-option>
+          <nb-option value="Enrichissement Données">Enrichissement Données</nb-option>
+          <nb-option value="Attente Retour(Achat Delegue)">Attente Retour(Achat Delegue)</nb-option>
+          <nb-option value="Adjudication">Adjudication</nb-option>
+          <nb-option value="Attente Retour (Fournisseur)">Attente Retour (Fournisseur)</nb-option>
+          <nb-option value="Lancement P2P">Lancement P2P</nb-option>
+        </nb-select>
+       
       </div>
     </nb-card-header>
-  
+ 
   </nb-card>
   <nb-card>
       <nb-card-body>
@@ -19,246 +30,189 @@
                        </tr-->
               <tr class="h-auto text-white">
                 <th>
-                  Code Fournisseur
+                  Code Projet
                   <!--                      <input nbInput [(ngModel)]="name" (ngModelChange)="getAllApps(1)" placeholder="Application" fullWidth/>-->
                 </th>
                 <th>
-                  Nom Complet
+                  Nom
                   <!--                      <input nbInput [(ngModel)]="description" (ngModelChange)="getAllApps(1)" placeholder="Description" fullWidth/>-->
                 </th>
-                <th>Notation</th>
-                <th>Nombre de projets</th>
-                <th>Disponibilité</th>
-                <th>Status</th>
-                <th>Actions</th>
-    
+                <th>Etat</th>
+                <th>Budget</th>
+                <th>Nombre de fournisseur</th>    
               </tr>
               </thead>
-    
-              <tbody>
-              <tr >
-                <td>MA101</td>
-                <td>Taha EL MANIARI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-  
-              </tr>
-              <tr >
-                <td>MA102</td>
-                <td>Yassine EL MANIARI</td>
-                <td>5/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA103</td>
-                <td>Kamal SADGALI</td>
-                <td>6/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA104</td>
-                <td>Rim SADGALI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA105</td>
-                <td>Zakaria NABIL</td>
-                <td>5/10</td>
-                <td>3 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA106</td>
-                <td>Ahlam NAJAHI</td>
-                <td>4/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA107</td>
-                <td>Omar MAARAF</td>
-                <td>6/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA101</td>
-                <td>Taha EL MANIARI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-  
-              </tr>
-              <tr >
-                <td>MA102</td>
-                <td>Yassine EL MANIARI</td>
-                <td>5/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA103</td>
-                <td>Kamal SADGALI</td>
-                <td>6/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA104</td>
-                <td>Rim SADGALI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA105</td>
-                <td>Zakaria NABIL</td>
-                <td>5/10</td>
-                <td>3 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA106</td>
-                <td>Ahlam NAJAHI</td>
-                <td>4/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA107</td>
-                <td>Omar MAARAF</td>
-                <td>6/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA101</td>
-                <td>Taha EL MANIARI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-  
-              </tr>
-              <tr >
-                <td>MA102</td>
-                <td>Yassine EL MANIARI</td>
-                <td>5/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA103</td>
-                <td>Kamal SADGALI</td>
-                <td>6/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA104</td>
-                <td>Rim SADGALI</td>
-                <td>7/10</td>
-                <td>2 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA105</td>
-                <td>Zakaria NABIL</td>
-                <td>5/10</td>
-                <td>3 projet(s)</td>
-                <td>Immediate</td>
-                <td>Mieux Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
-              <tr >
-                <td>MA106</td>
-                <td>Ahlam NAJAHI</td>
-                <td>4/10</td>
-                <td>1 projet(s)</td>
-                <td>Immediate</td>
-                <td>Moins Disant</td>
-                <td>
-                  <button nbButton type="submit" hero status="danger" class="m-0" >Annoter</button>
-                </td>
-              </tr>
+   
+              <tbody *ngIf="status">
+                <tr *ngFor="let a of nb">
+                  <td>10{{a}}</td>
+                  <td>Projet {{a}}</td>
+                  <td>{{status}}</td>
+                  <td>{{a}}0000</td>
+                  <td>{{a}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="status === 0">
+                <tr>
+                  <td>10</td>
+                  <td>Projet 1</td>
+                  <td>Initiation Projet</td>
+                  <td>10000</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Projet 13</td>
+                  <td>Initiation Projet</td>
+                  <td>20000</td>
+                  <td>13</td>
+                </tr>
+             
+ 
+                <tr>
+                  <td>11</td>
+                  <td>Projet 2</td>
+                  <td>Enrichissement Données</td>
+                  <td>10000</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Projet 3</td>
+                  <td>Enrichissement Données</td>
+                  <td>20000</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Projet 4</td>
+                  <td>Enrichissement Données</td>
+                  <td>25000</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>32</td>
+                  <td>Projet 22</td>
+                  <td>Enrichissement Données</td>
+                  <td>10000</td>
+                  <td>22</td>
+                </tr>
+             
+                <tr>
+                  <td>14</td>
+                  <td>Projet 5</td>
+                  <td>Attente Retour (Achat Délégué)</td>
+                  <td>15000</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>Projet 6</td>
+                  <td>Attente Retour (Achat Délégué)</td>
+                  <td>10000</td>
+                  <td>6</td>
+                </tr>
+                <tr>
+                  <td>30</td>
+                  <td>Projet 20</td>
+                  <td>Attente Retour (Achat Délégué)</td>
+                  <td>20000</td>
+                  <td>20</td>
+                </tr>
+               
+ 
+ 
+ 
+                <tr>
+                  <td>16</td>
+                  <td>Projet 7</td>
+                  <td>Adjudication</td>
+                  <td>17000</td>
+                  <td>7</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Projet 8</td>
+                  <td>Adjudication</td>
+                  <td>15000</td>
+                  <td>8</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>Projet 18</td>
+                  <td>Adjudication</td>
+                  <td>15000</td>
+                  <td>18</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>Projet 19</td>
+                  <td>Adjudication</td>
+                  <td>22000</td>
+                  <td>19</td>
+                </tr>
+ 
+ 
+                <tr>
+                  <td>19</td>
+                  <td>Projet 9</td>
+                  <td>Attente Retour (Fournisseur)</td>
+                  <td>22000</td>
+                  <td>9</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>Projet 10</td>
+                  <td>Attente Retour (Fournisseur)</td>
+                  <td>20000</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>Projet 18</td>
+                  <td>Attente Retour (Fournisseur)</td>
+                  <td>17000</td>
+                  <td>17</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>Projet 17</td>
+                  <td>Attente Retour (Fournisseur)</td>
+                  <td>10000</td>
+                  <td>16</td>
+                </tr>
+ 
+ 
+                <tr>
+                  <td>21</td>
+                  <td>Projet 11</td>
+                  <td>Lancement P2P</td>
+                  <td>10000</td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Projet 12</td>
+                  <td>Lancement P2P</td>
+                  <td>10000</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Projet 15</td>
+                  <td>Lancement P2P</td>
+                  <td>25000</td>
+                  <td>14</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Projet 16</td>
+                  <td>Lancement P2P</td>
+                  <td>15000</td>
+                  <td>15</td>
+                </tr>
+ 
+ 
               </tbody>
             </table>
       </nb-card-body>

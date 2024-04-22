@@ -1,4 +1,4 @@
-import {NgModule,CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER} from '@angular/core';
+import {NgModule,CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule, DatePipe} from '@angular/common';
 import {PagesComponent} from './pages.component';
 import {RouterModule} from "@angular/router";
@@ -61,6 +61,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializer } from '../services/keycloak-initializer';
 import { ProjetsComponent } from './projets/projets.component';
+import { AnotherMapComponent } from './another-map/another-map.component';
+import { StatusProjetComponent } from './status-projet/status-projet.component';
+import { DivisionBudgetProjetComponent } from './division-budget-projet/division-budget-projet.component';
 
 
 @NgModule({
@@ -100,6 +103,9 @@ import { ProjetsComponent } from './projets/projets.component';
     EvolutionProjetLotComponent,
     MapComponent,
     ProjetsComponent,
+    AnotherMapComponent,
+    StatusProjetComponent,
+    DivisionBudgetProjetComponent,
   ],
   imports: [
     CommonModule,
@@ -129,8 +135,7 @@ import { ProjetsComponent } from './projets/projets.component';
     ChartModule,
     MapsModule,
     FontAwesomeModule,
-    KeycloakAngularModule
-
+    ThemeModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

@@ -50,8 +50,13 @@ export class NotationFournisseurComponent implements OnInit {
     color: '#A569BD',
     },
     ]
-    }
+    },
     ],
+
+
+
+
+
     credits: {
     enabled: false
     }

@@ -1,7 +1,4 @@
-import {faCoffee} from "@fortawesome/free-solid-svg-icons";
 import {NbMenuItem} from "@nebular/theme";
-
-
 
 export const MENU_ITEMS: NbMenuItem[] = [
 
@@ -9,7 +6,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     link: '/pages/pilotage',
-    icon: 'home',
+    icon: {
+      icon: 'shapes',
+      pack: 'fas'
+    },
   },
   {
     title: 'Projets',
@@ -18,10 +18,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/projets',
 
     },
-  {
+ /*  {
     title: 'Estimation Cout',
     icon: 'list-outline',
-    expanded: true,
+    expanded: false,
     children: [
       {
         title: "Article 1",
@@ -44,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'people-outline',
       },
     ],
-  },
+  }, */
   // {
   //   title: 'Demandes à valider',
   //   link: '/demandes-a-valider',
@@ -58,11 +58,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Fournisseurs',
     link: '/pages/list-fournisseur',
-    icon: 'people-outline',
-  },
-  {
-    title: 'Esitmations',
-    link: '/pages/estimation-cout',
-    icon: 'people-outline',
+    icon: 'fa-star',
   },
 ]
